@@ -97,7 +97,7 @@
                                             </div>
                                             <div class="d-flex align-items-start flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">Prabowo</h6>
-                                                <p class="mb-0 text-xs">Koordinator Project</p>
+                                                <p class="mb-0 text-xs">Administrator Web</p>
                                             </div>
                                             <a class="btn btn-link text-success pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto"
                                                 href="javascript:;">Admin</a>
@@ -109,43 +109,7 @@
                                             </div>
                                             <div class="d-flex align-items-start flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">Luthfi Ahmad Fadilah</h6>
-                                                <p class="mb-0 text-xs">Koordinator Kabupaten Kuningan</p>
-                                            </div>
-                                            <a class="btn btn-link text-success pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto"
-                                                href="javascript:;">Admin</a>
-                                        </li>
-                                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                                            <div class="avatar me-3">
-                                                <img src="{{ asset('assets-frontend/img/john.jpg') }}" alt="kal"
-                                                    class="border-radius-lg shadow">
-                                            </div>
-                                            <div class="d-flex align-items-start flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Joko Mulyono</h6>
-                                                <p class="mb-0 text-xs">Koordinator Kabupaten Banjar</p>
-                                            </div>
-                                            <a class="btn btn-link text-success pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto"
-                                                href="javascript:;">Admin</a>
-                                        </li>
-                                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                                            <div class="avatar me-3">
-                                                <img src="{{ asset('assets-frontend/img/john.jpg') }}" alt="kal"
-                                                    class="border-radius-lg shadow">
-                                            </div>
-                                            <div class="d-flex align-items-start flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Ujer</h6>
-                                                <p class="mb-0 text-xs">Koordinator Kabupaten Pangandaran</p>
-                                            </div>
-                                            <a class="btn btn-link text-success pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto"
-                                                href="javascript:;">Admin</a>
-                                        </li>
-                                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                                            <div class="avatar me-3">
-                                                <img src="{{ asset('assets-frontend/img/john.jpg') }}" alt="kal"
-                                                    class="border-radius-lg shadow">
-                                            </div>
-                                            <div class="d-flex align-items-start flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Dasuki Musleh</h6>
-                                                <p class="mb-0 text-xs">Koordinator Kabupaten Ciamis</p>
+                                                <p class="mb-0 text-xs">Administrator Web</p>
                                             </div>
                                             <a class="btn btn-link text-success pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto"
                                                 href="javascript:;">Admin</a>

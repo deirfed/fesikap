@@ -10,26 +10,53 @@
             </div>
             <ul class="navbar-nav d-flex align-items-center justify-content-end">
                 <li class="nav-item d-flex align-items-center">
-                    <a href="{{ route('main-dashboard') }}" class="nav-link text-body p-0">
+                    <a href="{{ route('dashboard') }}" class="nav-link text-body p-0">
                         <i class="material-symbols-rounded fixed-plugin-button-nav">home</i>
                     </a>
                 </li>
-                <li class="nav-item px-3 d-flex align-items-center">
-                    <a href="{{ route('admin') }}" class="nav-link text-body p-0">
-                        <i class="material-symbols-rounded fixed-plugin-button-nav">Dashboard</i>
-                    </a>
-                </li>
-                <li class="nav-item d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body p-0">
-                        <i class="material-symbols-rounded fixed-plugin-button-nav">Settings</i>
-                    </a>
-                </li>
+                @unless (auth()->user()->role === 'user')
+                    <li class="nav-item d-flex px-3 align-items-center">
+                        <a href="{{ route('admin') }}" class="nav-link text-body p-0">
+                            <i class="material-symbols-rounded fixed-plugin-button-nav">settings</i>
+                        </a>
+                    </li>
+                @endunless
+                @unless (auth()->user()->role === 'user')
+                    <li class="nav-item d-flex align-items-center">
+                        <a href="{{ route('info-web') }}" class="nav-link text-body font-weight-bold px-0">
+                            <i class="material-symbols-rounded">info</i>
+                        </a>
+                    </li>
+                @endunless
+
                 <li class="nav-item d-flex px-3 align-items-center">
-                    <a href="{{ route('profile') }}" class="nav-link text-body font-weight-bold px-0">
-                        <i class="material-symbols-rounded">account_circle</i>
+                    <a href="javascript:;" class="nav-link text-body p-0" data-bs-toggle="modal"
+                        data-bs-target="#logoutModal">
+                        <i class="material-symbols-rounded fixed-plugin-button-nav">logout</i>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">Konfirmasi Logout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+            </div>
+            <div class="modal-body">
+                Apakah kamu yakin ingin logout?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Ya, Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -17,6 +17,8 @@
         integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    @vite(['resources/js/app.js'])
+
 </head>
 
 
@@ -38,18 +40,19 @@
     </main>
 
     <script src="{{ asset('assets-frontend/js/core/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets-frontend/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets-frontend/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets-frontend/js/plugins/smooth-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets-frontend/js/plugins/chartjs.min.js') }}"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script src="{{ asset('assets/js/material-dashboard.min.js?v=3.2.0') }}"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/treemap.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script src="https://code.highcharts.com/themes/adaptive.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
 
 
     <script>
@@ -59,8 +62,18 @@
             setTimeout(() => preloader.remove(), 1000);
         });
     </script>
-    
+
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+
     @yield('javascript')
+
+    @stack('javascript')
 
 </body>
 
