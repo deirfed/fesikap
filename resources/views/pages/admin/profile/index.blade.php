@@ -18,7 +18,7 @@
                 <span class="mask bg-gradient-dark opacity-6 position-absolute w-100 h-100"></span>
 
                 <div class="position-absolute top-50 start-50 translate-middle z-index-2 text-center">
-                    <img src="{{ env('APP_CMS_URL') }}{{ $project->party->logo ?? 'N/A' }}" alt="logo_partai"
+                    <img src="{{ env('APP_CMS_URL') }}/storage/{{ $project->party->logo ?? 'N/A' }}" alt="logo_partai"
                         style="width: 100px; height: auto;">
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <div class="row gx-4 mb-2">
                     <div class="col-auto">
                         <div class="avatar avatar-xl position-relative">
-                            <img src="{{ env('APP_CMS_URL') }}{{ $project->profile->photo ?? 'N/A' }}" alt="photo_profile"
+                            <img src="{{ env('APP_CMS_URL') }}/storage/{{ $project->profile->photo ?? 'N/A' }}" alt="photo_profile"
                                 class="w-100 border-radius-lg shadow-sm">
                         </div>
                     </div>

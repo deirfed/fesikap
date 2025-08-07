@@ -49,12 +49,12 @@
                                     </h6>
                                 </div>
                                 <div class="mx-3 text-center">
-                                    <img src="{{ env('APP_CMS_URL') }}{{ $project->profile->photo ?? 'N/A' }}"
+                                    <img src="{{ env('APP_CMS_URL') }}/storage/{{ $project->profile->photo ?? 'N/A' }}"
                                         alt="photo_profile"
                                         style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%; border: 2px solid #fff;">
                                 </div>
                                 <div style="max-width: 60px; width: 100%; overflow: hidden;">
-                                    <img src="{{ env('APP_CMS_URL') }}{{ $project->party->logo ?? 'N/A' }}"
+                                    <img src="{{ env('APP_CMS_URL') }}/storage/{{ $project->party->logo ?? 'N/A' }}"
                                         alt="logo_partai"
                                         style="width: 100%; height: auto; display: block; object-fit: contain;">
                                 </div>
