@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Gender;
+use App\Models\Project;
+use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -12,37 +16,43 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::orderBy('name', 'ASC')->paginate(50);
+        $project = Auth::user()->project;
+        $users = User::where('project_id', $project->id)
+                ->whereNot('role_id', 1)
+                ->orderBy('name', 'ASC')
+                ->get();
 
-        return view('pages.admin.datauser', compact('users'));
+        return view('pages.admin.user.index', compact([
+            'users',
+            'project',
+        ]));
     }
 
     public function create()
     {
-        return view('pages.admin.form-add-user');
+        $roles = Role::whereNot('id', 1)->get();
+        $genders = Gender::all();
+        return view('pages.admin.user.create', compact([
+            'roles',
+            'genders',
+        ]));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $rawData = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'phone' => 'required|integer',
-            'role' => 'required|string',
+            'phone' => 'required|numeric',
+            'role_id' => 'required|numeric|exists:role,id',
+            'gender_id' => 'required|numeric|exists:gender,id',
         ]);
 
-        $email = $request->input('email');
+        $rawData['password'] = Hash::make('sikap123');
+        $rawData['project_id'] = Auth::user()->project_id;
 
-        $user = new User();
-        $user->name = $request->input('name');
-        $user->email = $email;
-        $user->phone = $request->input('phone');
-        $user->password = Hash::make('sikap123');
-        $user->role = $request->input('role');
-        $user->status = 'active';
+        $data = User::updateOrCreate($rawData, $rawData);
 
-        $user->save();
-
-        return redirect()->route('data-user')->with('success', 'Data Berhasil Diinput');
+        return redirect()->route('user.index')->with('success', 'Data user ' . $data->name . ' berhasil Ditambahkan');
     }
 }

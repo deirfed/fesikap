@@ -7,7 +7,7 @@
 @endsection
 
 @section('page-name')
-    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('admin') }}">Data Pemilu</a></li>
+    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('navigasi.index') }}">Data Pemilu</a></li>
 @endsection
 
 @section('content')

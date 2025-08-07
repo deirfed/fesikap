@@ -7,7 +7,7 @@
 @endsection
 
 @section('page-name')
-    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('admin') }}">User Setting</a></li>
+    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('navigasi.index') }}">User Setting</a></li>
 @endsection
 
 @section('content')
@@ -70,7 +70,7 @@
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                            Status Akun
+                                            Tim
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
@@ -96,12 +96,12 @@
                                             </td>
                                             <td class="align-middle text-center">
                                                 <span
-                                                    class="text-secondary text-xs font-weight-bold">{{ $user->role ?? '-' }}</span>
+                                                    class="text-secondary text-xs font-weight-bold">{{ $user->role->name ?? '-' }}
+                                                </span>
                                             </td>
-                                            <td class="align-middle text-xs text-center">
+                                            <td class="align-middle text-center">
                                                 <span
-                                                    class="badge {{ $user->status == 'active' ? 'bg-success' : 'bg-danger' }}">
-                                                    {{ $user->status }}
+                                                    class="text-secondary text-xs font-weight-bold">{{ $user->project->profile->nama_lengkap ?? '-' }}
                                                 </span>
                                             </td>
                                             <td class="align-middle text-center">

@@ -1,0 +1,47 @@
+{
+  "resources/js/app.js": {
+    "file": "assets/app-be90f123.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  },
+  "resources/js/dashboardCekKunjungan.js": {
+    "file": "assets/dashboardCekKunjungan-9a77b8fc.js",
+    "isEntry": true,
+    "src": "resources/js/dashboardCekKunjungan.js"
+  },
+  "resources/js/dashboardCekSuaraFromSVG.js": {
+    "file": "assets/dashboardCekSuaraFromSVG-7e863dca.js",
+    "isEntry": true,
+    "src": "resources/js/dashboardCekSuaraFromSVG.js"
+  },
+  "resources/js/dashboardJumlahAspirasi.js": {
+    "file": "assets/dashboardJumlahAspirasi-ba0cd96f.js",
+    "isEntry": true,
+    "src": "resources/js/dashboardJumlahAspirasi.js"
+  },
+  "resources/js/dashboardShowSuara.js": {
+    "file": "assets/dashboardShowSuara-c978f350.js",
+    "isEntry": true,
+    "src": "resources/js/dashboardShowSuara.js"
+  },
+  "resources/js/dashboardTotalKunjungan.js": {
+    "file": "assets/dashboardTotalKunjungan-9b6929cd.js",
+    "isEntry": true,
+    "src": "resources/js/dashboardTotalKunjungan.js"
+  },
+  "resources/js/formInputIsu.js": {
+    "file": "assets/formInputIsu-006b679e.js",
+    "isEntry": true,
+    "src": "resources/js/formInputIsu.js"
+  },
+  "resources/js/helper.js": {
+    "file": "assets/helper-49ff64c2.js",
+    "isEntry": true,
+    "src": "resources/js/helper.js"
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-9490438c.css",
+    "isEntry": true,
+    "src": "resources/sass/app.scss"
+  }
+}

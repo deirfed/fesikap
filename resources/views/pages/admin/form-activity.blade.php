@@ -8,7 +8,7 @@
 
 @section('page-name')
     <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="{{ route('form-activity') }}">Form</a>
+        <a class="opacity-5 text-dark" href="{{ route('navigasi.index') }}">Admin</a>
     </li>
 @endsection
 
@@ -26,7 +26,7 @@
                             <h6 class="text-white text-capitalize ps-3">Input Aktivitas</h6>
                         </div>
                     </div>
-                    <form action="{{ route('admin') }}">
+                    <form action="{{ route('navigasi.index') }}">
                         <div class="card-body px-4 pb-4">
                             <div class="mb-3">
                                 <label for="isu" class="form-label">Desa<small class="text-muted"></small></label>
@@ -100,7 +100,7 @@
                                 <input type="hidden" name="daftar_isu" id="daftarIsuInput">
                             </div>
                             <div class="text-end">
-                                <a href="{{ route('admin') }}">
+                                <a href="{{ route('navigasi.index') }}">
                                     <button type="submit" class="btn btn-success">
                                         <i class="fas fa-save me-1"></i> Simpan
                                     </button>

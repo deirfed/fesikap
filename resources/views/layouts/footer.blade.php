@@ -7,7 +7,7 @@
                     <script>
                         document.write(new Date().getFullYear())
                     </script>.
-                    <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">TIDE
+                    <a href="https://tideupindustries.com" class="font-weight-bold" target="_blank">TIDE
                         UP - SIKAP Project</a>
                 </div>
             </div>

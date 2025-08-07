@@ -10,24 +10,20 @@
             </div>
             <ul class="navbar-nav d-flex align-items-center justify-content-end">
                 <li class="nav-item d-flex align-items-center">
-                    <a href="{{ route('dashboard') }}" class="nav-link text-body p-0">
+                    <a href="{{ route('dashboard.index') }}" class="nav-link text-body p-0">
                         <i class="material-symbols-rounded fixed-plugin-button-nav">home</i>
                     </a>
                 </li>
-                @unless (auth()->user()->role === 'user')
-                    <li class="nav-item d-flex px-3 align-items-center">
-                        <a href="{{ route('admin') }}" class="nav-link text-body p-0">
-                            <i class="material-symbols-rounded fixed-plugin-button-nav">settings</i>
-                        </a>
-                    </li>
-                @endunless
-                @unless (auth()->user()->role === 'user')
-                    <li class="nav-item d-flex align-items-center">
-                        <a href="{{ route('info-web') }}" class="nav-link text-body font-weight-bold px-0">
-                            <i class="material-symbols-rounded">info</i>
-                        </a>
-                    </li>
-                @endunless
+                <li class="nav-item d-flex px-3 align-items-center">
+                    <a href="{{ route('navigasi.index') }}" class="nav-link text-body p-0">
+                        <i class="material-symbols-rounded fixed-plugin-button-nav">settings</i>
+                    </a>
+                </li>
+                <li class="nav-item d-flex align-items-center">
+                    <a href="{{ route('informasi.index') }}" class="nav-link text-body font-weight-bold px-0">
+                        <i class="material-symbols-rounded">info</i>
+                    </a>
+                </li>
 
                 <li class="nav-item d-flex px-3 align-items-center">
                     <a href="javascript:;" class="nav-link text-body p-0" data-bs-toggle="modal"
