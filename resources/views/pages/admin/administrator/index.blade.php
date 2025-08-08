@@ -7,8 +7,12 @@
 @endsection
 
 @section('page-name')
-    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('navigasi.index') }}">Admin</a></li>
+    <x-breadcrumb :items="[
+        ['label' => 'Menu', 'route' => route('menu.index')],
+        ['label' => 'Halaman Admin', 'route' => route('administrator.index')],
+    ]" />
 @endsection
+
 
 @section('content')
     <div class="container-fluid py-2">
@@ -102,7 +106,8 @@
                             <div class="card-header p-2 ps-3">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <p class="text-sm mb-0 text-capitalize">{{ $item->kabupaten_type ?? null }} {{ $item->kabupaten_name ?? '-' }}</p>
+                                        <p class="text-sm mb-0 text-capitalize">{{ $item->kabupaten_type ?? null }}
+                                            {{ $item->kabupaten_name ?? '-' }}</p>
                                         <h4 class="mb-0">{{ $item->kunjungan ?? 0 }}</h4>
                                     </div>
                                     <div

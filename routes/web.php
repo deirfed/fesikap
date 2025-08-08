@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdministratorController;
 use App\Http\Controllers\admin\AktivitasController;
 use App\Http\Controllers\admin\InformasiController;
 use App\Http\Controllers\admin\IsuController;
@@ -19,15 +20,21 @@ use App\Http\Controllers\ViewController;
 Auth::routes();
 
 Route::get('/', function () {
-    return redirect()->route('dashboard.index');
+    return redirect()->route('menu.index');
 })->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
+
     Route::resource('/dashboard', DashboardController::class);
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/menu', 'mainMenu')->name('menu.index');
+    });
 
     Route::resource('/user', UserController::class);
+    Route::delete('/admin/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
-    Route::resource('/navigasi', NavigasiController::class);
+
+    Route::resource('/administrator', AdministratorController::class);
 
     Route::resource('/profile', ProfileController::class);
 
@@ -42,27 +49,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/photo-aktivitas', PhotoAktivitasController::class);
 
     Route::resource('/isu', IsuController::class);
-
-    Route::controller(ViewController::class)->group(function () {
-        // Route::get('/form-activity', 'form_activity')->name('form-activity');
-        // Route::get('/admin', 'admin_page')->name('admin');
-    });
-
-    Route::controller(ViewController::class)->group(function () {
-        // Route::get('/dashboard', 'dashboard')->name('dashboard');
-        // Route::get('/profile', 'profile')->name('profile');
-        // Route::get('/detail', 'detail')->name('detail');
-        // Route::get('/data-pemilu', 'data_pemilu')->name('data-pemilu');
-    });
-
-    // Route::controller(UserController::class)->group(function () {
-    //     Route::get('/data-user', 'index')->name('data-user');
-    //     Route::get('/create', 'create')->name('create.user');
-    //     Route::post('/store', 'store')->name('store.user');
-    // });
-
-    Route::controller(MiscellaneousController::class)->group(function () {
-        // Route::get('/request-fitur', 'request_fitur')->name('request-fitur');
-        // Route::get('/info-web', 'info_web')->name('info-web');
-    });
 });

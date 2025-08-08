@@ -7,7 +7,11 @@
 @endsection
 
 @section('page-name')
-    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('navigasi.index') }}">Profile</a></li>
+    <x-breadcrumb :items="[
+        ['label' => 'Menu', 'route' => route('menu.index')],
+        ['label' => 'Halaman Admin', 'route' => route('administrator.index')],
+        ['label' => 'Profile', 'route' => route('profile.index')],
+    ]" />
 @endsection
 
 @section('content')
@@ -28,8 +32,8 @@
                 <div class="row gx-4 mb-2">
                     <div class="col-auto">
                         <div class="avatar avatar-xl position-relative">
-                            <img src="{{ env('APP_CMS_URL') }}/storage/{{ $project->profile->photo ?? 'N/A' }}" alt="photo_profile"
-                                class="w-100 border-radius-lg shadow-sm">
+                            <img src="{{ env('APP_CMS_URL') }}/storage/{{ $project->profile->photo ?? 'N/A' }}"
+                                alt="photo_profile" class="w-100 border-radius-lg shadow-sm">
                         </div>
                     </div>
                     <div class="col-auto my-auto">
@@ -70,8 +74,8 @@
                                                 class="text-dark">Nama Lengkap:</strong> &nbsp;
                                             {{ $project->profile->nama_lengkap ?? 'N/A' }}
                                         </li>
-                                        <li class="list-group-item border-0 ps-0 text-sm"><strong
-                                                class="text-dark">Nomor HP:</strong> &nbsp;
+                                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Nomor
+                                                HP:</strong> &nbsp;
                                             {{ $project->profile->phone ?? 'N/A' }}
                                         </li>
                                         <li class="list-group-item border-0 ps-0 text-sm"><strong
@@ -157,23 +161,30 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama Lengkap</label>
-                            <input type="text" id="name" class="form-control border border-dark px-3" value="{{ $project->profile->nama_lengkap ?? 'N/A' }}" disabled>
+                            <input type="text" id="name" class="form-control border border-dark px-3"
+                                value="{{ $project->profile->nama_lengkap ?? 'N/A' }}" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" id="email" class="form-control border border-dark px-3" placeholder="input email" value="{{ $project->profile->email ?? 'N/A' }}" autocomplete="off" required>
+                            <input type="email" name="email" id="email"
+                                class="form-control border border-dark px-3" placeholder="input email"
+                                value="{{ $project->profile->email ?? 'N/A' }}" autocomplete="off" required>
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Nomor HP</label>
-                            <input type="text" name="phone" id="phone" class="form-control border border-dark px-3" placeholder="input nomor hp" value="{{ $project->profile->phone ?? 'N/A' }}" autocomplete="off" required>
+                            <input type="text" name="phone" id="phone"
+                                class="form-control border border-dark px-3" placeholder="input nomor hp"
+                                value="{{ $project->profile->phone ?? 'N/A' }}" autocomplete="off" required>
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Alamat</label>
-                            <textarea class="form-control border border-dark px-3" name="address" id="address" required placeholder="input alamat">{{ $project->profile->address ?? 'N/A' }}</textarea>
+                            <textarea class="form-control border border-dark px-3" name="address" id="address" required
+                                placeholder="input alamat">{{ $project->profile->address ?? 'N/A' }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Deskripsi</label>
-                            <textarea class="form-control border border-dark px-3" name="description" id="description" required placeholder="input deskripsi" rows="7">{{ $project->profile->description ?? 'N/A' }}</textarea>
+                            <textarea class="form-control border border-dark px-3" name="description" id="description" required
+                                placeholder="input deskripsi" rows="7">{{ $project->profile->description ?? 'N/A' }}</textarea>
                         </div>
                     </div>
 

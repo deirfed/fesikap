@@ -7,9 +7,11 @@
 @endsection
 
 @section('page-name')
-    <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="{{ route('navigasi.index') }}">Form Request Fitur</a>
-    </li>
+    <x-breadcrumb :items="[
+        ['label' => 'Menu', 'route' => route('menu.index')],
+        ['label' => 'Halaman Admin', 'route' => route('administrator.index')],
+        ['label' => 'Form Request', 'route' => route('request.create')],
+    ]" />
 @endsection
 
 @push('javascript')
@@ -56,7 +58,7 @@
                                     name="photo" accept="image/*">
                             </div>
                             <div class="text-end">
-                                <a class="btn btn-primary" href="{{ route('navigasi.index') }}">
+                                <a class="btn btn-primary" href="{{ route('administrator.index') }}">
                                     <i class="fas fa-times me-1"></i> Batal
                                 </a>
                                 <button type="submit" class="btn btn-success">

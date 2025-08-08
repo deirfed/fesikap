@@ -7,7 +7,10 @@
 @endsection
 
 @section('page-name')
-    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('navigasi.index') }}">Data Pemilu</a></li>
+    <x-breadcrumb :items="[
+        ['label' => 'Menu', 'route' => route('menu.index')],
+        ['label' => 'Data Pemilu', 'route' => route('pemilu.index')],
+    ]" />
 @endsection
 
 @section('content')
@@ -94,16 +97,23 @@
                                 <tbody>
                                     @foreach ($pemilu as $item)
                                         <tr>
-                                            <td class="align-middle text-center">{{ $loop->iteration }}</td>
-                                            <td class="align-middle text-center">{{ $item->tps->dapil->project->profile->nama_lengkap ?? 'N/A' }}</td>
-                                            <td class="align-middle text-center">{{ $item->vote ?? 0 }}</td>
-                                            <td class="align-middle text-center">{{ $item->vote_party ?? 0 }}</td>
-                                            <td class="align-middle text-center">{{ $item->vote + $item->vote_party ?? 0 }}</td>
-                                            <td class="align-middle text-center">{{ $item->tps->dapil->project->party->name ?? 'N/A' }}</td>
-                                            <td class="align-middle text-center">{{ $item->tps->dapil->name ?? 'N/A' }}</td>
-                                            <td class="align-middle text-center">{{ $item->tps->desa->name ?? 'N/A' }}</td>
-                                            <td class="align-middle text-center">{{ $item->tps->desa->kecamatan->name ?? 'N/A' }}</td>
-                                            <td class="align-middle text-center">{{ $item->tps->desa->kecamatan->kabupaten->name ?? 'N/A' }}</td>
+                                            <td class="align-middle text-xs text-center">{{ $loop->iteration }}</td>
+                                            <td class="align-middle text-xs text-center">
+                                                {{ $item->tps->dapil->project->profile->nama_lengkap ?? 'N/A' }}</td>
+                                            <td class="align-middle text-xs  text-center">{{ $item->vote ?? 0 }}</td>
+                                            <td class="align-middle text-xs  text-center">{{ $item->vote_party ?? 0 }}</td>
+                                            <td class="align-middle text-xs  text-center">
+                                                {{ $item->vote + $item->vote_party ?? 0 }}</td>
+                                            <td class="align-middle text-xs  text-center">
+                                                {{ $item->tps->dapil->project->party->name ?? 'N/A' }}</td>
+                                            <td class="align-middle text-xs  text-center">
+                                                {{ $item->tps->dapil->name ?? 'N/A' }}</td>
+                                            <td class="align-middle text-xs  text-center">
+                                                {{ $item->tps->desa->name ?? 'N/A' }}</td>
+                                            <td class="align-middle text-xs  text-center">
+                                                {{ $item->tps->desa->kecamatan->name ?? 'N/A' }}</td>
+                                            <td class="align-middle text-xs  text-center">
+                                                {{ $item->tps->desa->kecamatan->kabupaten->name ?? 'N/A' }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

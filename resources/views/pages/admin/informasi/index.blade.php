@@ -7,8 +7,10 @@
 @endsection
 
 @section('page-name')
-    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard.index') }}">Informasi Web</a>
-    </li>
+    <x-breadcrumb :items="[
+        ['label' => 'Menu', 'route' => route('menu.index')],
+        ['label' => 'Informasi Website', 'route' => route('informasi.index')],
+    ]" />
 @endsection
 
 @section('content')

@@ -15,7 +15,7 @@
                     </a>
                 </li>
                 <li class="nav-item d-flex px-3 align-items-center">
-                    <a href="{{ route('navigasi.index') }}" class="nav-link text-body p-0">
+                    <a href="{{ route('administrator.index') }}" class="nav-link text-body p-0">
                         <i class="material-symbols-rounded fixed-plugin-button-nav">settings</i>
                     </a>
                 </li>

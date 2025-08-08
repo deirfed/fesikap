@@ -7,7 +7,10 @@
 @endsection
 
 @section('page-name')
-    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard.index') }}">Dashboard</a></li>
+    <x-breadcrumb :items="[
+        ['label' => 'Menu', 'route' => route('menu.index')],
+        ['label' => 'Dashboard', 'route' => route('dashboard.index')],
+    ]" />
 @endsection
 
 @push('javascript')
@@ -210,7 +213,7 @@
                         <p class="mb-0 text-sm">
                             <span class="text-success font-weight-bolder">150 </span>Total Kunjungan
                         </p>
-                        <a href="{{ route('navigasi.index') }}" class="text-success" title="Lihat Detail">
+                        <a href="{{ route('administrator.index') }}" class="text-success" title="Lihat Detail">
                             <i class="material-symbols-rounded">visibility</i>
                         </a>
                     </div>
@@ -260,7 +263,7 @@
                         <p class="mb-0 text-sm">
                             <span class="text-success font-weight-bolder">2345 </span>Isu / Aspirasi
                         </p>
-                        <a href="{{ route('navigasi.index') }}" class="text-success" title="Lihat Detail">
+                        <a href="{{ route('administrator.index') }}" class="text-success" title="Lihat Detail">
                             <i class="material-symbols-rounded">visibility</i>
                         </a>
                     </div>
@@ -475,7 +478,7 @@
                         </small>
                     </div>
                     <div class="card-body text-center mb-2">
-                        @include('pages.shared.svg')
+                        @include('pages.user.dashboard.svg')
                     </div>
                 </div>
             </div>

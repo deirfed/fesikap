@@ -11,6 +11,24 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
+
+    public function mainMenu()
+    {
+        $project = Auth::user()->project;
+        $project_id = $project->id;
+        $tahun = Carbon::now()->format('Y');
+        $dapil = Dapil::where('project_id', $project_id)->first();
+
+        $kunjungan = Visit::where('project_id', $project_id)->get();
+
+        return view('pages.user.navigasi.index', compact([
+            'project',
+            'kunjungan',
+            'tahun',
+            'dapil',
+        ]));
+    }
+
     public function index()
     {
         $project = Auth::user()->project;
@@ -28,17 +46,7 @@ class DashboardController extends Controller
         ]));
     }
 
-    public function create()
-    {
-        //
-    }
-
     public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(string $id)
     {
         //
     }

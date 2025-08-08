@@ -66,7 +66,7 @@ class RequestController extends Controller
             $data->update(['photo' => $photoPath]);
         }
 
-        return redirect()->route('navigasi.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('administrator.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function show(string $id)

@@ -28,8 +28,15 @@
         <img src="{{ asset('assets-frontend/img/preloader.png') }}" alt="Loading..." class="preloader-img">
     </div>
 
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">\
 
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        @if (session('success'))
+            <div class="alert alert-success text-white alert-dismissible fadeout">{{ session('success') }}</div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger text-white alert-dismissible fadeout">{{ session('error') }}</div>
+        @endif
 
         @include('layouts.header')
 
@@ -53,23 +60,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.highcharts.com/modules/drilldown.js"></script>
     <script src="https://code.highcharts.com/modules/data.js"></script>
-
-
-    <script>
-        window.addEventListener("load", function() {
-            const preloader = document.getElementById("preloader");
-            preloader.classList.add("fade-out");
-            setTimeout(() => preloader.remove(), 1000);
-        });
-    </script>
-
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    @if (session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
-    @endif
+    <script src="{{ asset('assets-frontend/js/core/helper.js') }}"></script>
 
     @yield('javascript')
 

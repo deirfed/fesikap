@@ -7,9 +7,11 @@
 @endsection
 
 @section('page-name')
-    <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="{{ route('navigasi.index') }}">Detali Aktivitas</a>
-    </li>
+    <x-breadcrumb :items="[
+        ['label' => 'Menu', 'route' => route('menu.index')],
+        ['label' => 'Halaman Admin', 'route' => route('administrator.index')],
+        ['label' => 'Detail Aktivitas'],
+    ]" />
 @endsection
 
 @push('javascript')

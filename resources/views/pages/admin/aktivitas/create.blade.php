@@ -7,9 +7,11 @@
 @endsection
 
 @section('page-name')
-    <li class="breadcrumb-item text-sm">
-        <a class="opacity-5 text-dark" href="{{ route('navigasi.index') }}">Admin</a>
-    </li>
+    <x-breadcrumb :items="[
+        ['label' => 'Menu', 'route' => route('menu.index')],
+        ['label' => 'Halaman Admin', 'route' => route('administrator.index')],
+        ['label' => 'Input Aktivitas'],
+    ]" />
 @endsection
 
 {{-- @push('javascript')
@@ -31,8 +33,10 @@
                         @method('POST')
                         <div class="card-body px-4 pb-4">
                             <div class="mb-3">
-                                <label for="visit_type_id" class="form-label">Jenis Aktivitas<small class="text-muted"></small></label>
-                                <select class="form-select border border-dark px-3" id="visit_type_id" name="visit_type_id" required>
+                                <label for="visit_type_id" class="form-label">Jenis Aktivitas<small
+                                        class="text-muted"></small></label>
+                                <select class="form-select border border-dark px-3" id="visit_type_id" name="visit_type_id"
+                                    required>
                                     <option value="" selected>-- Pilih jenis aktivitas --</option>
                                     @foreach ($visit_types as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -78,42 +82,8 @@
                                 <textarea class="form-control border border-dark px-3" id="remark" name="remark" rows="2"
                                     placeholder="Tambahkan catatan jika perlu"></textarea>
                             </div>
-
-                            {{-- <div class="card shadow-sm border border-dark p-3 mb-4 bg-light-subtle">
-                                <h6 class="text-dark fw-bold mb-3">Tambahkan Isu / Aspirasi</h6>
-
-                                <div class="row g-3 align-items-start">
-                                    <div class="col-md-6">
-                                        <label for="isuSelect" class="form-label mb-1">Kategori Isu</label>
-                                        <select class="form-select form-select-sm border-dark" id="isuSelect">
-                                            <option value="" selected disabled>Pilih kategori</option>
-                                            @foreach ($categories as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="isuDetail" class="form-label mb-1">Detail Masalah</label>
-                                        <textarea id="isuDetail" class="form-control border border-dark px-3" rows="3"
-                                            placeholder="Masukkan penjelasan isu/masalah..."></textarea>
-                                    </div>
-
-                                    <div class="col-md-2 d-flex align-items-end">
-                                        <button type="button" class="btn btn-success btn-sm w-100" id="addIsuBtn">Tambah
-                                        </button>
-                                    </div>
-                                </div>
-                                <hr class="my-3">
-                                <div id="keranjangIsu" class="mb-2">
-                                    <label class="form-label fw-semibold">Daftar Isu Ditambahkan:</label>
-                                    <div id="isuList" class="d-flex flex-column gap-2"></div>
-                                </div>
-
-                                <input type="hidden" name="daftar_isu" id="daftarIsuInput">
-                            </div> --}}
                             <div class="text-end">
-                                <a class="btn btn-primary" href="{{ route('navigasi.index') }}">
+                                <a class="btn btn-primary" href="{{ route('administrator.index') }}">
                                     <i class="fas fa-times me-1"></i> Batal
                                 </a>
                                 <button type="submit" class="btn btn-success">
