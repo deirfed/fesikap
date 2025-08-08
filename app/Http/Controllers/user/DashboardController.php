@@ -15,6 +15,12 @@ class DashboardController extends Controller
     public function mainMenu()
     {
         $project = Auth::user()->project;
+
+        if (!$project) {
+            Auth::logout();
+            return redirect()->route('login')->with('error', 'Login gagal. Kamu belum memiliki project. Silakan hubungi Admin!');
+        }
+
         $project_id = $project->id;
         $tahun = Carbon::now()->format('Y');
         $dapil = Dapil::where('project_id', $project_id)->first();

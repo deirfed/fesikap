@@ -29190,20 +29190,3 @@ pre[class*=language-] {
   .pulse.clicked-glow {
     animation: glow 1s infinite;
   }
-
-  .fade-out {
-    opacity: 0;
-    max-height: 0;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    transition: opacity 0.5s ease, max-height 0.5s ease, margin 0.3s ease, padding 0.3s ease;
-}
-
-.fadeout.hidden {
-    opacity: 0;
-    transform: translateY(-10px);
-}
-
-
-
