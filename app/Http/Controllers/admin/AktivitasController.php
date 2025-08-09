@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Exports\VisitExport;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Dapil;
@@ -11,9 +12,11 @@ use App\Models\Visit;
 use App\Models\VisitPhoto;
 use App\Models\VisitType;
 use App\Services\ImageUploadService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AktivitasController extends Controller
 {
@@ -100,6 +103,70 @@ class AktivitasController extends Controller
     public function edit(string $id)
     {
         //
+    }
+
+    public function export(Request $request)
+    {
+        $request->validate([
+            'kabupaten_id' => 'nullable|numeric',
+            'kecamatan_id' => 'nullable|numeric',
+            'desa_id' => 'nullable|numeric',
+            'visit_type_id' => 'nullable|numeric',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
+            'type' => 'required|string',
+        ]);
+
+        $kabupaten_id = $request->kabupaten_id ?? null;
+        $kecamatan_id = $request->kecamatan_id ?? null;
+        $desa_id = $request->desa_id ?? null;
+        $visit_type_id = $request->visit_type_id ?? null;
+        $start_date = $request->start_date ?? null;
+        $end_date = $request->end_date ?? $start_date;
+        $type = $request->type ?? null;
+
+        $project = Auth::user()->project;
+        $project_id = $project->id;
+        $dapil = Dapil::where('project_id', $project_id)->first();
+
+        $query = Visit::where('project_id', $project_id);
+
+        if($kabupaten_id != null)
+        {
+            $query->whereRelation('desa.kecamatan.kabupaten', 'id', '=', $kabupaten_id);
+        }
+
+        if($kecamatan_id != null)
+        {
+            $query->whereRelation('desa.kecamatan', 'id', '=', $kecamatan_id);
+        }
+
+        if($desa_id != null)
+        {
+            $query->where('desa_id', $desa_id);
+        }
+
+        if($visit_type_id != null)
+        {
+            $query->where('visit_type_id', $visit_type_id);
+        }
+        if($start_date != null && $end_date != null)
+        {
+            $query->whereBetween('date', [$start_date, $end_date]);
+        }
+
+        $data = $query->get();
+
+        if ($type === 'excel') {
+            return Excel::download(new VisitExport($data), 'data_aktivitas.xlsx');
+        } elseif ($type === 'pdf') {
+            $pdf = Pdf::loadView('pages.admin.aktivitas.pdf', [
+                        'aktivitas' => $data,
+                        'project' => $project,
+                        'dapil' => $dapil,
+                    ]);
+            return $pdf->setPaper('a4', 'potrait')->stream('data_aktivitas.pdf');
+        }
     }
 
     public function update(Request $request, string $id)
