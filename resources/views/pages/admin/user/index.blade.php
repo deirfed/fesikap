@@ -10,7 +10,7 @@
     <x-breadcrumb :items="[
         ['label' => 'Menu', 'route' => route('menu.index')],
         ['label' => 'Halaman Admin', 'route' => route('administrator.index')],
-        ['label' => 'Tambah User', 'route' => route('request.create')],
+        ['label' => 'Data User', 'route' => route('user.index')],
     ]" />
 @endsection
 
@@ -42,10 +42,6 @@
                                         data-toggle="tooltip" title="Add New Activity">
                                         <i class="fas fa-plus me-1"></i> Tambah Data
                                     </button></a>
-                                <a href=""><button class="btn btn-sm btn-secondary" data-toggle="tooltip"
-                                        title="Filter Data">
-                                        <i class="fas fa-filter me-1"></i> Filter
-                                    </button></a>
                                 <a href=""><button class="btn btn-sm btn-success" data-toggle="tooltip"
                                         title="Export Data">
                                         <i class="fas fa-file-export me-1"></i> Export
@@ -53,78 +49,10 @@
                             </div>
                         </div>
                         <!-- End Tombol Aksi -->
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
-                                            No.
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
-                                            Nama
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
-                                            Kontak
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                            Role
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                            Tim
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                            Aksi
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($users as $user)
-                                        <tr>
-                                            <td class="align-middle text-center">
-                                                <span
-                                                    class="text-secondary text-xs font-weight-bold">{{ $loop->iteration }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span
-                                                    class="text-secondary text-xs font-weight-bold">{{ $user->name ?? '-' }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span
-                                                    class="text-secondary text-xs font-weight-bold">{{ $user->phone ?? '-' }}
-                                                    <br>({{ $user->email }})</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span
-                                                    class="text-secondary text-xs font-weight-bold">{{ $user->role->name ?? '-' }}
-                                                </span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span
-                                                    class="text-secondary text-xs font-weight-bold">{{ $user->project->profile->nama_lengkap ?? '-' }}
-                                                </span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <a href="{{ route('user.edit', $user->uuid) }}"
-                                                    class="badge bg-dark text-white text-decoration-none" title="Edit">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="javascript:void(0);"
-                                                    class="badge bg-danger text-white text-decoration-none" title="Delete"
-                                                    data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                                    data-id="{{ $user->id }}" data-name="{{ $user->name }}">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                        <div class="table-responsive p-2">
+                            {{ $dataTable->table([
+                                'class' => 'table table-bordered table-striped table-vcenter table-sm fs-sm text-nowrap align-middle',
+                            ]) }}
                         </div>
                     </div>
                 </div>
@@ -132,6 +60,7 @@
         </div>
     </div>
 
+    <!-- Delete Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <form id="deleteForm" method="POST">
@@ -156,8 +85,12 @@
             </form>
         </div>
     </div>
+    <!-- End Delete Modal -->
 @endsection
 
+@push('javascript')
+    @include('components.datatables')
+@endpush
 
 @section('javascript')
     <script>

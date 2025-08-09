@@ -138,104 +138,116 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <!-- Tombol Aksi -->
-                        <div class="d-flex justify-content-between align-items-center px-4 pb-3">
+                        <div class="d-flex justify-content-between align-items-center px-4 pb-2">
                             <h6 class="mb-0">Tabel Kunjungan</h6>
                             <div class="d-flex gap-2">
                                 <a href="{{ route('aktivitas.create') }}"><button class="btn btn-sm btn-primary"
                                         data-toggle="tooltip" title="Add New Activity">
                                         <i class="fas fa-plus me-1"></i> Tambah Data
                                     </button></a>
-                                <a href=""><button class="btn btn-sm btn-secondary" data-toggle="tooltip"
-                                        title="Filter Data">
-                                        <i class="fas fa-filter me-1"></i> Filter
-                                    </button></a>
+                                <button class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                                    data-bs-target="#filterModal" title="Filter Data">
+                                    <i class="fas fa-filter me-1"></i> Filter
+                                </button>
                                 <a href=""><button class="btn btn-sm btn-success" data-toggle="tooltip"
                                         title="Export Data">
                                         <i class="fas fa-file-export me-1"></i> Export
                                     </button></a>
                             </div>
                         </div>
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
-                                            No.
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Tanggal Kunjungan
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Jenis Kunjungan
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Desa
-                                        </th>
-
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Aksi
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($kunjungan as $data)
-                                        <tr>
-                                            <td class="align-middle text-center">
-                                                <span
-                                                    class="text-secondary text-xxs font-weight-bold">{{ $loop->iteration }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span
-                                                    class="text-secondary text-xxs font-weight-bold">{{ $data->date }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span
-                                                    class="badge rounded-pill text-xxs font-weight-bold
-                                                    @switch($data->visit_type_id)
-                                                    @case(1) bg-primary @break
-                                                    @case(2) bg-success @break
-                                                    @case(3) bg-warning text-dark @break
-                                                    @default bg-secondary
-                                                    @endswitch
-                                                ">
-                                                    {{ $data->visit_type->name ?? 'N/A' }}
-                                                </span>
-                                            </td>
-
-                                            <td class="align-middle text-center">
-                                                <span
-                                                    class="text-secondary text-xxs font-weight-bold">{{ $data->desa->name ?? 'N/A' }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <a href="{{ route('aktivitas.show', $data->uuid) }}"
-                                                    class="badge bg-success text-white text-decoration-none"
-                                                    data-toggle="tooltip" title="View">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                                <a href="javascript:;"
-                                                    class="badge bg-dark text-white text-decoration-none"
-                                                    data-toggle="tooltip" title="Edit">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="javascript:;"
-                                                    class="badge bg-danger text-white text-decoration-none"
-                                                    data-toggle="tooltip" title="Delete">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                        <div class="table-responsive p-2">
+                            {{ $dataTable->table([
+                                'class' => 'table table-bordered table-striped table-vcenter table-sm fs-sm text-nowrap align-middle',
+                            ]) }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Filter Modal -->
+    <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="{{ route('administrator.index') }}" method="GET">
+                @method('GET')
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="filterModalLabel">Filter Data</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="kabupaten_id" class="form-label">Kabupaten</label>
+                            <select name="kabupaten_id" id="kabupaten_id" class="form-select">
+                                <option value="" selected disabled>Pilih Kabupaten</option>
+                                @foreach ($kabupaten as $item)
+                                    <option value="{{ $item->id }}" @selected($item->id == $kabupaten_id)>{{ $item->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kecamatan_id" class="form-label">Kecamatan</label>
+                            <select name="kecamatan_id" id="kecamatan_id" class="form-select">
+                                <option value="" selected disabled>Pilih Kecamatan</option>
+                                @foreach ($kecamatan as $item)
+                                    <option value="{{ $item->id }}" @selected($item->id == $kecamatan_id)>{{ $item->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="desa_id" class="form-label">Desa</label>
+                            <select name="desa_id" id="desa_id" class="form-select">
+                                <option value="" selected disabled>Pilih Desa</option>
+                                @foreach ($desa as $item)
+                                    <option value="{{ $item->id }}" @selected($item->id == $desa_id)>{{ $item->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="dokter_id">Tanggal</label>
+                            <div class="row align-items-center g-2">
+                                <div class="col">
+                                    <input class="form-control border border-dark px-3" type="date" name="start_date"
+                                        value="{{ $start_date }}">
+                                </div>
+                                <div class="col-auto">
+                                    <span class="form-text">s/d</span>
+                                </div>
+                                <div class="col">
+                                    <input class="form-control border border-dark px-3" type="date" name="end_date"
+                                        value="{{ $end_date }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="visit_type_id" class="form-label">Jenis Kunjungan</label>
+                            <select name="visit_type_id" id="visit_type_id" class="form-select">
+                                <option value="" selected disabled>Pilih Jenis Kunjungan</option>
+                                @foreach ($visit_type as $item)
+                                    <option value="{{ $item->id }}" @selected($item->id == $visit_type_id)>{{ $item->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{{ route('administrator.index') }}" class="btn btn-primary">Reset</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Terapkan Filter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Filter Modal -->
 @endsection
+
+@push('javascript')
+    @include('components.datatables')
+@endpush

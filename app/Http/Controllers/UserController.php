@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\UserDataTable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,16 +15,11 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
-    public function index()
+    public function index(UserDataTable $dataTable)
     {
         $project = Auth::user()->project;
-        $users = User::where('project_id', $project->id)
-            ->whereNot('role_id', 1)
-            ->orderBy('name', 'ASC')
-            ->get();
 
-        return view('pages.admin.user.index', compact([
-            'users',
+        return $dataTable->render('pages.admin.user.index', compact([
             'project',
         ]));
     }

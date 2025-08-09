@@ -28,7 +28,7 @@
         <img src="{{ asset('assets-frontend/img/preloader.png') }}" alt="Loading..." class="preloader-img">
     </div>
 
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">\
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 
         @include('layouts.header')
 

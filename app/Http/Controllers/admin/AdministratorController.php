@@ -2,17 +2,30 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\DataTables\AktivitasDataTable;
 use App\Models\User;
 use App\Models\Dapil;
 use App\Models\Visit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Desa;
+use App\Models\Kabupaten;
+use App\Models\Kecamatan;
+use App\Models\RelasiDapil;
+use App\Models\VisitType;
 use Illuminate\Support\Facades\Auth;
 
 class AdministratorController extends Controller
 {
-    public function index()
+    public function index(AktivitasDataTable $dataTable, Request $request)
     {
+        $kabupaten_id = $request->kabupaten_id ?? null;
+        $kecamatan_id = $request->kecamatan_id ?? null;
+        $desa_id = $request->desa_id ?? null;
+        $visit_type_id = $request->visit_type_id ?? null;
+        $start_date = $request->start_date ?? null;
+        $end_date = $request->end_date ?? $start_date;
+
         $users = collect();
         $kabupaten_dapil = collect();
         $kunjungan = collect();
@@ -73,56 +86,72 @@ class AdministratorController extends Controller
                 ->values();
         }
 
-        return view('pages.admin.administrator.index', compact([
+        $dapil = Dapil::where('project_id', $project->id)->first();
+
+        $kabupaten_ids = RelasiDapil::where('dapil_id', $dapil->id)->pluck('kabupaten_id');
+
+        $kabupaten = Kabupaten::whereIn('id', $kabupaten_ids)->get();
+
+        $kecamatan = Kecamatan::whereHas('kabupaten', function ($query) use ($kabupaten_ids) {
+                $query->whereIn('id', $kabupaten_ids);
+            })->get();
+
+        $desa = Desa::whereHas('kecamatan.kabupaten', function ($query) use ($kabupaten_ids) {
+                $query->whereIn('id', $kabupaten_ids);
+            })->get();
+
+        $visit_type = VisitType::all();
+
+        return $dataTable->with([
+            'kabupaten_id' => $kabupaten_id,
+            'kecamatan_id' => $kecamatan_id,
+            'desa_id' => $desa_id,
+            'visit_type_id' => $visit_type_id,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+        ])->render('pages.admin.administrator.index', compact([
             'project',
             'users',
             'kabupaten_dapil',
             'kunjungan',
+            'kabupaten',
+            'kecamatan',
+            'desa',
+            'visit_type',
+            'kabupaten_id',
+            'kecamatan_id',
+            'desa_id',
+            'visit_type_id',
+            'start_date',
+            'end_date',
         ]));
     }
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //

@@ -194,13 +194,14 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-header p-2 ps-3">
                         <div class="d-flex justify-content-between">
                             <div>
                                 <p class="text-sm mb-0 text-capitalize">Total Kunjungan</p>
-                                <h4 class="mb-0">150</h4>
+                                <h4 class="mb-0">{{ $totalKunjungan ?? 'N/A' }}</h4>
                             </div>
                             <div
                                 class="icon icon-md icon-shape bg-gradient-success shadow-dark shadow text-center border-radius-lg">
@@ -211,7 +212,7 @@
                     <hr class="dark horizontal my-0">
                     <div class="card-footer p-2 ps-3 d-flex justify-content-between align-items-center">
                         <p class="mb-0 text-sm">
-                            <span class="text-success font-weight-bolder">150 </span>Total Kunjungan
+                            <span class="text-success font-weight-bolder">{{ $totalKunjungan ?? 'N/A' }} </span>Total Kunjungan
                         </p>
                         <a href="{{ route('administrator.index') }}" class="text-success" title="Lihat Detail">
                             <i class="material-symbols-rounded">visibility</i>
@@ -225,7 +226,7 @@
                         <div class="d-flex justify-content-between">
                             <div>
                                 <p class="text-sm mb-0 text-capitalize">Desa Terkunjungi</p>
-                                <h4 class="mb-0">356</h4>
+                                <h4 class="mb-0">{{ $desaTerkunjungi ?? 'N/A' }}</h4>
                             </div>
                             <div
                                 class="icon icon-md icon-shape bg-gradient-success shadow-dark shadow text-center border-radius-lg">
@@ -236,9 +237,9 @@
                     <hr class="dark horizontal my-0">
                     <div class="card-footer p-2 ps-3 d-flex justify-content-between align-items-center">
                         <p class="mb-0 text-sm">
-                            <span class="text-success font-weight-bolder">50% </span>Desa telah dikunjungi
+                            <span class="text-success font-weight-bolder">{{ $persentaseDesa }}% </span>Desa telah dikunjungi
                         </p>
-                        <a href="#detail-kunjungan" class="text-success" title="Lihat Detail">
+                        <a href="{{ route('administrator.index') }}" class="text-success" title="Lihat Detail">
                             <i class="material-symbols-rounded">visibility</i>
                         </a>
                     </div>
@@ -250,7 +251,7 @@
                         <div class="d-flex justify-content-between">
                             <div>
                                 <p class="text-sm mb-0 text-capitalize">Isu Terkumpul</p>
-                                <h4 class="mb-0">3,462</h4>
+                                <h4 class="mb-0">{{ $totalIsu ?? 'N/A' }}</h4>
                             </div>
                             <div
                                 class="icon icon-md icon-shape bg-gradient-success shadow-dark shadow text-center border-radius-lg">
@@ -261,7 +262,7 @@
                     <hr class="dark horizontal my-0">
                     <div class="card-footer p-2 ps-3 d-flex justify-content-between align-items-center">
                         <p class="mb-0 text-sm">
-                            <span class="text-success font-weight-bolder">2345 </span>Isu / Aspirasi
+                            <span class="text-success font-weight-bolder">{{ $totalIsu ?? 'N/A' }} </span>Isu/Aspirasi
                         </p>
                         <a href="{{ route('administrator.index') }}" class="text-success" title="Lihat Detail">
                             <i class="material-symbols-rounded">visibility</i>
@@ -275,7 +276,7 @@
                         <div class="d-flex justify-content-between">
                             <div>
                                 <p class="text-sm mb-0 text-capitalize">Rata-rata Kunjungan</p>
-                                <h4 class="mb-0">10</h4>
+                                <h4 class="mb-0">{{ $rataRataKunjungan ?? 'N/A' }}</h4>
                             </div>
                             <div
                                 class="icon icon-md icon-shape bg-gradient-success shadow-dark shadow text-center border-radius-lg">
@@ -286,9 +287,9 @@
                     <hr class="dark horizontal my-0">
                     <div class="card-footer p-2 ps-3 d-flex justify-content-between align-items-center">
                         <p class="mb-0 text-sm">
-                            <span class="text-success font-weight-bolder">10 Kali </span>Rerata Kunjungan per Bulan
+                            <span class="text-success font-weight-bolder">{{ $rataRataKunjungan ?? 'N/A' }} Kali </span>Rerata Kunjungan per Bulan
                         </p>
-                        <a href="#detail-kunjungan" class="text-success" title="Lihat Detail">
+                        <a href="{{ route('administrator.index') }}" class="text-success" title="Lihat Detail">
                             <i class="material-symbols-rounded">visibility</i>
                         </a>
                     </div>
@@ -375,95 +376,11 @@
                     </small>
                 </div>
                 <div class="card-body px-0 pb-2" style="overflow-x: auto; overflow-y: auto;">
-                    <div class="d-flex justify-content-between align-items-center px-4 pb-3">
-                        <h6 class="mb-0">Tabel Kunjungan</h6>
-                        <div class="d-flex gap-2">
-                            <form action="#" method="GET" class="d-flex align-items-center">
-                                <input type="text" name="query" class="form-control form-control-sm me-2"
-                                    placeholder="Cari aktivitas..." aria-label="Search">
-                                <button class="btn btn-sm btn-info" type="submit" data-toggle="tooltip" title="Cari">
-                                    <i class="fas fa-search me-1"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
-                                        No.
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Tanggal Kunjungan
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Jenis Kunjungan
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Desa
-                                    </th>
-                                    @unless (auth()->user()->role === 'user')
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Aksi
-                                        </th>
-                                    @endunless
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($kunjungan as $item)
-                                    <tr>
-                                        <td class="align-middle text-center">
-                                            <span
-                                                class="text-secondary text-xxs font-weight-bold">{{ $loop->iteration }}</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span
-                                                class="text-secondary text-xxs font-weight-bold">{{ $item->date ?? 'N/A' }}</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span
-                                                class="badge rounded-pill text-xxs font-weight-bold
-                                                @switch($item->visit_type_id)
-                                                    @case(1) bg-primary @break
-                                                    @case(2) bg-success @break
-                                                    @case(3) bg-warning text-dark @break
-                                                    @default bg-secondary
-                                                @endswitch
-                                            ">
-                                                {{ $item->visit_type->name ?? 'N/A' }}
-                                            </span>
-                                        </td>
-
-                                        <td class="align-middle text-center">
-                                            <span
-                                                class="text-secondary text-xxs font-weight-bold">{{ $item->desa->name ?? 'N/A' }}</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <a href="{{ route('aktivitas.show', $item->uuid) }}"
-                                                class="badge bg-success text-white text-decoration-none"
-                                                data-toggle="tooltip" title="View">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="javascript:;" class="badge bg-dark text-white text-decoration-none"
-                                                data-toggle="tooltip" title="Edit">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="javascript:;" class="badge bg-danger text-white text-decoration-none"
-                                                data-toggle="tooltip" title="Delete">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                    <h6 class="ps-2 mb-0">Tabel Kunjungan</h6>
+                    <div class="table-responsive p-2">
+                        {{ $dataTable->table([
+                            'class' => 'table table-bordered table-striped table-vcenter table-sm fs-sm text-nowrap align-middle',
+                        ]) }}
                     </div>
                 </div>
             </div>
@@ -509,3 +426,7 @@
         </div>
     </div>
 @endsection
+
+@push('javascript')
+    @include('components.datatables')
+@endpush
