@@ -149,10 +149,10 @@
                                     data-bs-target="#filterModal" title="Filter Data">
                                     <i class="fas fa-filter me-1"></i> Filter
                                 </button>
-                                <a href=""><button class="btn btn-sm btn-success" data-toggle="tooltip"
-                                        title="Export Data">
+                                <button class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#exportModal">
                                         <i class="fas fa-file-export me-1"></i> Export
-                                    </button></a>
+                                </button>
                             </div>
                         </div>
                         <div class="table-responsive p-2">
@@ -246,6 +246,44 @@
         </div>
     </div>
     <!-- End Filter Modal -->
+
+    <!-- Export Modal -->
+    <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="{{ route('aktivitas.export') }}" method="POST">
+                @csrf
+                @method('POST')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exportModalLabel">Export Data</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="hidden" name="kabupaten_id" value="{{ $kabupaten_id ?? null }}">
+                        <input type="hidden" name="kecamatan_id" value="{{ $kecamatan_id ?? null }}">
+                        <input type="hidden" name="desa_id" value="{{ $desa_id ?? null }}">
+                        <input type="hidden" name="visit_type_id" value="{{ $visit_type_id ?? null }}">
+                        <input type="hidden" name="start_date" value="{{ $start_date ?? null }}">
+                        <input type="hidden" name="end_date" value="{{ $end_date ?? null }}">
+                        <div class="mb-3">
+                            <label for="type" class="form-label">Pilih Format Export</label>
+                            <select class="form-select border border-dark p-2" id="type" name="type" required>
+                                <option value="" selected disabled>-- Pilih format --</option>
+                                <option value="excel">Excel (.xlsx)</option>
+                                <option value="pdf">PDF (.pdf)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Export Sekarang</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Export Modal -->
 @endsection
 
 @push('javascript')

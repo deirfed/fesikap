@@ -38,14 +38,9 @@
                         <div class="d-flex justify-content-between align-items-center px-4 pb-3">
                             <h6 class="mb-0">Data User</h6>
                             <div class="d-flex gap-2">
-                                <a href="{{ route('user.create') }}"><button class="btn btn-sm btn-primary"
-                                        data-toggle="tooltip" title="Add New Activity">
-                                        <i class="fas fa-plus me-1"></i> Tambah Data
-                                    </button></a>
-                                <a href=""><button class="btn btn-sm btn-success" data-toggle="tooltip"
-                                        title="Export Data">
-                                        <i class="fas fa-file-export me-1"></i> Export
-                                    </button></a>
+                                <a class="btn btn-sm btn-primary" href="{{ route('user.create') }}" data-toggle="tooltip" title="Add New Activity">
+                                    <i class="fas fa-plus me-1"></i> Tambah Data
+                                </a>
                             </div>
                         </div>
                         <!-- End Tombol Aksi -->
@@ -66,7 +61,7 @@
             <form id="deleteForm" method="POST">
                 @csrf
                 @method('DELETE')
-                <div class="modal-content">
+                <div class="modal-content text-center">
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title" id="deleteModalLabel">
                             <i class="fas fa-exclamation-triangle me-2"></i> Konfirmasi Hapus
