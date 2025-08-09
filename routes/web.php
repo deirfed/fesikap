@@ -39,12 +39,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/profile', ProfileController::class);
 
     Route::resource('/pemilu', PemiluController::class);
+    Route::post('/pemilu/export', [PemiluController::class, 'export'])->name('pemilu.export');
 
     Route::resource('/informasi', InformasiController::class);
 
     Route::resource('/request', RequestController::class);
 
     Route::resource('/aktivitas', AktivitasController::class);
+    Route::post('/aktivitas/export', [AktivitasController::class, 'export'])->name('aktivitas.export');
 
     Route::resource('/photo-aktivitas', PhotoAktivitasController::class);
 

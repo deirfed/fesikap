@@ -62,7 +62,9 @@
     <!-- Export Modal -->
     <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form action="#" method="GET">
+            <form action="{{ route('pemilu.export') }}" method="POST">
+                @csrf
+                @method('POST')
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exportModalLabel">Export Data</h5>
@@ -70,11 +72,14 @@
                     </div>
 
                     <div class="modal-body">
+                        <input type="hidden" name="kabupaten_id" value="{{ $kabupaten_id ?? null }}">
+                        <input type="hidden" name="kecamatan_id" value="{{ $kecamatan_id ?? null }}">
+                        <input type="hidden" name="desa_id" value="{{ $desa_id ?? null }}">
                         <div class="mb-3">
-                            <label for="format" class="form-label">Pilih Format Export</label>
-                            <select class="form-select" id="format" name="format" required>
-                                <option value="xlsx">Excel (.xlsx)</option>
-                                <option value="csv">CSV (.csv)</option>
+                            <label for="type" class="form-label">Pilih Format Export</label>
+                            <select class="form-select border border-dark p-2" id="type" name="type" required>
+                                <option value="" selected disabled>-- Pilih format --</option>
+                                <option value="excel">Excel (.xlsx)</option>
                                 <option value="pdf">PDF (.pdf)</option>
                             </select>
                         </div>
@@ -107,7 +112,8 @@
                             <select name="kabupaten_id" id="kabupaten_id" class="form-select">
                                 <option value="" selected disabled>Pilih Kabupaten</option>
                                 @foreach ($kabupaten as $item)
-                                    <option value="{{ $item->id }}" @selected($item->id == $kabupaten_id)>{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}" @selected($item->id == $kabupaten_id)>{{ $item->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -116,7 +122,8 @@
                             <select name="kecamatan_id" id="kecamatan_id" class="form-select">
                                 <option value="" selected disabled>Pilih Kecamatan</option>
                                 @foreach ($kecamatan as $item)
-                                    <option value="{{ $item->id }}" @selected($item->id == $kecamatan_id)>{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}" @selected($item->id == $kecamatan_id)>{{ $item->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -125,7 +132,8 @@
                             <select name="desa_id" id="desa_id" class="form-select">
                                 <option value="" selected disabled>Pilih Desa</option>
                                 @foreach ($desa as $item)
-                                    <option value="{{ $item->id }}" @selected($item->id == $desa_id)>{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}" @selected($item->id == $desa_id)>{{ $item->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
