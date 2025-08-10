@@ -15,12 +15,22 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
-    public function index(UserDataTable $dataTable)
+    public function index(UserDataTable $dataTable, Request $request)
     {
-        $project = Auth::user()->project;
+        $status = $request->status ?? 'active';
+        $role_id = $request->role_id ?? null;
 
-        return $dataTable->render('pages.admin.user.index', compact([
+        $project = Auth::user()->project;
+        $roles = Role::whereNot('id', 1)->get();
+
+        return $dataTable->with([
+            'status' => $status,
+            'role_id' => $role_id,
+        ])->render('pages.admin.user.index', compact([
             'project',
+            'roles',
+            'status',
+            'role_id',
         ]));
     }
 
@@ -44,8 +54,33 @@ class UserController extends Controller
             'gender_id' => 'required|numeric|exists:gender,id',
         ]);
 
-        $rawData['password'] = Hash::make('sikap123');
-        $rawData['project_id'] = Auth::user()->project_id;
+        $roleId = $request->role_id;
+        $project_id = Auth::user()->project_id;
+
+        // Ambil limit dari ENV
+        $limitRoleAdmin = env('LIMIT_ROLE_ADMIN', 1);
+        $limitRoleUser = env('LIMIT_ROLE_USER', 8);
+
+        if ($roleId == 2) {
+            $count = User::where('role_id', 2)->where('project_id', $project_id)->count();
+            if ($count >= $limitRoleAdmin) {
+                return redirect()->route('user.index')->withErrors([
+                    'role_id' => "Akun dengan role ini sudah mencapai batas maksimal (hanya {$limitRoleAdmin} user)"
+                ]);
+            }
+        }
+
+        if ($roleId == 3) {
+            $count = User::where('role_id', 3)->where('project_id', $project_id)->count();
+            if ($count >= $limitRoleUser) {
+                return redirect()->route('user.index')->withErrors([
+                    'role_id' => "Akun dengan role ini sudah mencapai batas maksimal (hanya {$limitRoleUser} user)"
+                ]);
+            }
+        }
+
+        $rawData['password'] = Hash::make(env('DEFAULT_PASSWORD', 'sikap123'));
+        $rawData['project_id'] = $project_id;
 
         $data = User::updateOrCreate($rawData, $rawData);
 
@@ -78,11 +113,25 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', 'Data user berhasil diperbarui!');
     }
 
-    public function destroy($id)
+    public function activate($uuid)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
+        $user = User::where('uuid', $uuid)->firstOrFail();
 
-        return redirect()->route('user.index')->with('success', 'User berhasil dihapus!');
+        $user->unban();
+
+        return redirect()->route('user.index')->with('success', 'User berhasil diaktifkan kembali!');
+    }
+
+    public function destroy($uuid)
+    {
+        $user = User::where('uuid', $uuid)->firstOrFail();
+
+        if($user->id == Auth::user()->id){
+            return redirect()->route('user.index')->with('error', 'Anda tidak bisa melakukan ban akun sendiri.');
+        }
+
+        $user->ban();
+
+        return redirect()->route('user.index')->with('success', 'User berhasil di-ban!');
     }
 }
