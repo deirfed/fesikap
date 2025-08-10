@@ -179,36 +179,12 @@
                     </div>
 
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="kabupaten_id" class="form-label">Kabupaten</label>
-                            <select name="kabupaten_id" id="kabupaten_id" class="form-select">
-                                <option value="" selected disabled>Pilih Kabupaten</option>
-                                @foreach ($kabupaten as $item)
-                                    <option value="{{ $item->id }}" @selected($item->id == $kabupaten_id)>{{ $item->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="kecamatan_id" class="form-label">Kecamatan</label>
-                            <select name="kecamatan_id" id="kecamatan_id" class="form-select">
-                                <option value="" selected disabled>Pilih Kecamatan</option>
-                                @foreach ($kecamatan as $item)
-                                    <option value="{{ $item->id }}" @selected($item->id == $kecamatan_id)>{{ $item->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="desa_id" class="form-label">Desa</label>
-                            <select name="desa_id" id="desa_id" class="form-select">
-                                <option value="" selected disabled>Pilih Desa</option>
-                                @foreach ($desa as $item)
-                                    <option value="{{ $item->id }}" @selected($item->id == $desa_id)>{{ $item->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                        @livewire('filter-lokasi', [
+                            'prefix' => '',
+                            'kabupaten_id' => old('kabupaten_id', $kabupaten_id),
+                            'kecamatan_id' => old('kecamatan_id', $kecamatan_id),
+                            'desa_id' => old('desa_id', $desa_id),
+                        ])
                         <div class="mb-3">
                             <label class="form-label" for="dokter_id">Tanggal</label>
                             <div class="row align-items-center g-2">
