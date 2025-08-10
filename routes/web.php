@@ -23,7 +23,7 @@ Route::get('/', function () {
     return redirect()->route('menu.index');
 })->middleware('auth');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'checkBanned']], function () {
 
     Route::resource('/dashboard', DashboardController::class);
     Route::controller(DashboardController::class)->group(function () {
@@ -31,7 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::resource('/user', UserController::class);
-    Route::delete('/admin/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::delete('/user/activate/{uuid}', [UserController::class, 'activate'])->name('user.activate');
 
 
     Route::resource('/administrator', AdministratorController::class);
