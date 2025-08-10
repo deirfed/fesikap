@@ -39,36 +39,33 @@
                                     required>
                                     <option value="" selected>-- Pilih jenis aktivitas --</option>
                                     @foreach ($visit_types as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="desa_id" class="form-label">Desa<small class="text-muted"></small></label>
-                                <select class="form-select border border-dark px-3" id="desa_id" name="desa_id" required>
-                                    <option value="" selected>-- Pilih Desa --</option>
-                                    @foreach ($desa as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->name }} - Kec. {{ $item->kecamatan->name ?? 'N/A' }}
+                                        <option value="{{ $item->id }}" @selected($item->id == old('visit_type_id'))>
+                                            {{ $item->name }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
+                            @livewire('filter-lokasi', [
+                                'prefix' => '',
+                                'kabupaten_id' => old('kabupaten_id'),
+                                'kecamatan_id' => old('kecamatan_id'),
+                                'desa_id' => old('desa_id'),
+                            ])
                             <div class="mb-3">
                                 <label for="address" class="form-label">Detail Lokasi</label>
                                 <textarea class="form-control border border-dark px-3" id="address" name="address" rows="2"
-                                    placeholder="Detail lokasi kunjungan" required></textarea>
+                                    placeholder="Detail lokasi kunjungan" required>{{ old('address') }}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="date" class="form-label">Tanggal Kunjungan</label>
                                 <input type="date" class="form-control border border-dark px-3" id="date"
-                                    name="date" required>
+                                    name="date" required value="{{ old('date') }}">
                             </div>
 
                             <div class="mb-3">
                                 <label for="name" class="form-label">Minutes of Meeting / Laporan Kunjungan</label>
                                 <textarea class="form-control border border-dark px-3" id="name" name="name" rows="5"
-                                    placeholder="Wajib Mengisi MoM" required></textarea>
+                                    placeholder="Wajib Mengisi MoM" required>{{ old('name') }}</textarea>
                             </div>
 
                             <div class="mb-3">
@@ -80,7 +77,7 @@
                             <div class="mb-3">
                                 <label for="remark" class="form-label">Catatan</label>
                                 <textarea class="form-control border border-dark px-3" id="remark" name="remark" rows="2"
-                                    placeholder="Tambahkan catatan jika perlu"></textarea>
+                                    placeholder="Tambahkan catatan jika perlu">{{ old('remark') }}</textarea>
                             </div>
                             <div class="text-end">
                                 <a class="btn btn-primary" href="{{ route('administrator.index') }}">

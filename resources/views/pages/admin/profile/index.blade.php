@@ -100,8 +100,8 @@
                                         @foreach ($admin as $item)
                                             <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
                                                 <div class="avatar me-3">
-                                                    <img src="{{ asset('assets-frontend/img/john.jpg') }}" alt="kal"
-                                                        class="border-radius-lg shadow">
+                                                    <img src="{{ asset('assets-frontend/img/' . ($item->gender_id === 1 ? 'male' : 'female') . '.png') }}"
+                                                        alt="kal" class="border-radius-lg shadow">
                                                 </div>
                                                 <div class="d-flex align-items-start flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $item->name ?? 'N/A' }}</h6>
@@ -125,8 +125,8 @@
                                         @foreach ($user as $item)
                                             <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
                                                 <div class="avatar me-3">
-                                                    <img src="{{ asset('assets-frontend/img/john.jpg') }}" alt="kal"
-                                                        class="border-radius-lg shadow">
+                                                    <img src="{{ asset('assets-frontend/img/' . ($item->gender_id === 1 ? 'male' : 'female') . '.png') }}"
+                                                        alt="kal" class="border-radius-lg shadow">
                                                 </div>
                                                 <div class="d-flex align-items-start flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $item->name ?? 'N/A' }}</h6>
