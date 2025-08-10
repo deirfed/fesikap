@@ -128,34 +128,12 @@
                         </small>
                     </div>
                     <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <label for="pilihKabupaten" class="form-label">Pilih Kabupaten</label>
-                                <select id="pilihKabupaten" class="form-select">
-                                    <option selected disabled>-- Pilih Kabupaten --</option>
-                                    <option value="kuningan">Kab. Kuningan</option>
-                                    <option value="ciamis">Kab. Ciamis</option>
-                                    <option value="banjar">Kota Banjar</option>
-                                    <option value="pangandaran">Kab. Pangandaran</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="pilihKecamatan" class="form-label">Pilih Kecamatan</label>
-                                <select id="pilihKecamatan" class="form-select" disabled>
-                                    <option selected disabled>-- Pilih Kecamatan --</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="pilihDesa" class="form-label">Pilih Desa</label>
-                                <select id="pilihDesa" class="form-select" disabled>
-                                    <option selected disabled>-- Pilih Desa --</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div id="resultDesa" class="mt-4"></div>
+                        @livewire('cek-status-aktivitas', [
+                            'prefix' => '',
+                            'kabupaten_id' => old('kabupaten_id'),
+                            'kecamatan_id' => old('kecamatan_id'),
+                            'desa_id' => old('desa_id'),
+                        ])
                     </div>
                 </div>
             </div>
@@ -170,27 +148,12 @@
                         </small>
                     </div>
                     <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="pilihKab" class="form-label">Pilih Kabupaten</label>
-                                <select id="pilihKab" class="form-select">
-                                    <option selected disabled>-- Pilih Kabupaten --</option>
-                                    <option value="kabupaten-1">Kab. Kuningan</option>
-                                    <option value="kabupaten-2">Kab. Ciamis</option>
-                                    <option value="kabupaten-3">Kota Banjar</option>
-                                    <option value="kabupaten-4">Kab. Pangandaran</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="pilihKec" class="form-label">Pilih Kecamatan</label>
-                                <select id="pilihKec" class="form-select" disabled>
-                                    <option selected disabled>-- Pilih Kecamatan --</option>
-                                </select>
-                            </div>
-
-                            <div id="tableContainer" class="mt-3"></div>
-                        </div>
+                        @livewire('cek-status-suara', [
+                            'prefix' => '',
+                            'kabupaten_id' => old('kabupaten_id'),
+                            'kecamatan_id' => old('kecamatan_id'),
+                            'desa_id' => old('desa_id'),
+                        ])
                     </div>
                 </div>
             </div>
@@ -212,7 +175,8 @@
                     <hr class="dark horizontal my-0">
                     <div class="card-footer p-2 ps-3 d-flex justify-content-between align-items-center">
                         <p class="mb-0 text-sm">
-                            <span class="text-success font-weight-bolder">{{ $totalKunjungan ?? 'N/A' }} </span>Total Kunjungan
+                            <span class="text-success font-weight-bolder">{{ $totalKunjungan ?? 'N/A' }} </span>Total
+                            Kunjungan
                         </p>
                         <a href="{{ route('administrator.index') }}" class="text-success" title="Lihat Detail">
                             <i class="material-symbols-rounded">visibility</i>
@@ -237,7 +201,8 @@
                     <hr class="dark horizontal my-0">
                     <div class="card-footer p-2 ps-3 d-flex justify-content-between align-items-center">
                         <p class="mb-0 text-sm">
-                            <span class="text-success font-weight-bolder">{{ $persentaseDesa }}% </span>Desa telah dikunjungi
+                            <span class="text-success font-weight-bolder">{{ $persentaseDesa }}% </span>Desa telah
+                            dikunjungi
                         </p>
                         <a href="{{ route('administrator.index') }}" class="text-success" title="Lihat Detail">
                             <i class="material-symbols-rounded">visibility</i>
@@ -287,7 +252,8 @@
                     <hr class="dark horizontal my-0">
                     <div class="card-footer p-2 ps-3 d-flex justify-content-between align-items-center">
                         <p class="mb-0 text-sm">
-                            <span class="text-success font-weight-bolder">{{ $rataRataKunjungan ?? 'N/A' }} Kali </span>Rerata Kunjungan per Bulan
+                            <span class="text-success font-weight-bolder">{{ $rataRataKunjungan ?? 'N/A' }} Kali
+                            </span>Rerata Kunjungan per Bulan
                         </p>
                         <a href="{{ route('administrator.index') }}" class="text-success" title="Lihat Detail">
                             <i class="material-symbols-rounded">visibility</i>
