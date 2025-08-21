@@ -94,10 +94,10 @@
                                     <div class="carousel-item active">
                                         <div class="row justify-content-center align-items-center">
                                             <div class="col-6 d-flex justify-content-center align-items-center">
-                                                <img src="{{ env('APP_CMS_URL') }}/storage/{{ $item->photo ?? 'N/A' }}"
+                                                <img src="{{ asset('storage/' . $item->photo) }}"
                                                     class="img-fluid object-fit-contain rounded zoomable-img"
                                                     style="max-height: 800px; cursor: pointer;" data-bs-toggle="modal"
-                                                    data-bs-target="#zoomModal" data-img="{{ env('APP_CMS_URL') }}/storage/{{ $item->photo ?? 'N/A' }}">
+                                                    data-bs-target="#zoomModal" data-img="{{ asset('storage/', $item->photo) }}">
                                             </div>
                                         </div>
                                     </div>
